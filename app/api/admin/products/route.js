@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 
 function isAuthorized(request) {
   const secret = request.headers.get('x-admin-secret')
-  return secret === process.env.ADMIN_SECRET
+  return secret === 'cambiame123'
 }
 
 export async function POST(request) {
