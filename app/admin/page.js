@@ -31,9 +31,9 @@ export default function AdminPage() {
    setLoading(true)
 
    const supabase = createClient(
-     process.env.NEXT_PUBLIC_SUPABASE_URL,
-     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-   )
+  'https://fappkckfuqqwzrmnqfon.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZhcHBrY2tmdXFxd3pybW5xZm9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMDY3MDgsImV4cCI6MjA5NTY4MjcwOH0.LV7-eXyBYZymSH0PyR0dicnjepsFsqcDPga7AgiT8S8'
+)
 
    let image_url = null
 
