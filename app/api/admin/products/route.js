@@ -1,39 +1,45 @@
 export const dynamic = 'force-dynamic'
-import { supabaseAdmin } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
 function isAuthorized(request) {
- const secret = request.headers.get('x-admin-secret')
- console.log('secret recibido:', secret)
- console.log('secret esperado:', process.env.ADMIN_SECRET)
- return secret === process.env.ADMIN_SECRET
+  const secret = request.headers.get('x-admin-secret')
+  return secret === process.env.ADMIN_SECRET
 }
 
 export async function POST(request) {
- if (!isAuthorized(request))
-   return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  if (!isAuthorized(request))
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 
- const body = await request.json()
- const { data, error } = await supabaseAdmin
-   .from('products')
-   .insert([body])
-   .select()
-   .single()
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  )
+  const body = await request.json()
+  const { data, error } = await supabaseAdmin
+    .from('products')
+    .insert([body])
+    .select()
+    .single()
 
- if (error) return NextResponse.json({ error: error.message }, { status: 500 })
- return NextResponse.json(data, { status: 201 })
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  return NextResponse.json(data, { status: 201 })
 }
 
 export async function DELETE(request) {
- if (!isAuthorized(request))
-   return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  if (!isAuthorized(request))
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 
- const { id } = await request.json()
- const { error } = await supabaseAdmin
-   .from('products')
-   .delete()
-   .eq('id', id)
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  )
+  const { id } = await request.json()
+  const { error } = await supabaseAdmin
+    .from('products')
+    .delete()
+    .eq('id', id)
 
- if (error) return NextResponse.json({ error: error.message }, { status: 500 })
- return NextResponse.json({ ok: true })
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  return NextResponse.json({ ok: true })
 }
