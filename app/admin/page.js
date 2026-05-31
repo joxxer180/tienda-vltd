@@ -40,7 +40,7 @@ export default function AdminPage() {
    if (form.image_file) {
      const file = form.image_file
      const ext = file.name.split('.').pop()
-     const fileName = ${Date.now()}.${ext}
+     const fileName = `${Date.now()}.${ext}`
 
      const { error: uploadError } = await supabase.storage
        .from('products')
