@@ -2,6 +2,8 @@ export const dynamic = 'force-dynamic'
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
+const SUPABASE_URL = 'https://fappkckfuqqwzrmnqfon.supabase.co'
+
 function isAuthorized(request) {
   const secret = request.headers.get('x-admin-secret')
   return secret === 'cambiame123'
@@ -12,7 +14,7 @@ export async function POST(request) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 
   const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    SUPABASE_URL,
     process.env.SUPABASE_SERVICE_ROLE_KEY
   )
   const body = await request.json()
@@ -31,7 +33,7 @@ export async function DELETE(request) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 
   const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    SUPABASE_URL,
     process.env.SUPABASE_SERVICE_ROLE_KEY
   )
   const { id } = await request.json()
