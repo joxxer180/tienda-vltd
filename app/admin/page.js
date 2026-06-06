@@ -149,6 +149,8 @@ category} onChange={e => setForm({...form, category: e.target.value})}>
            </label>
            <label>Imagen del producto
              <input type="file" multiple accept="image/*" onChange={e => setForm({...form, image_files: Array.from(e.target.files || [])
+             })}
+             />
            </label>
            {msg && <div className={styles.msg}>{msg}</div>}
            <button type="submit" className={styles.btnSubmit} disabled={loading}>
