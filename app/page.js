@@ -92,7 +92,7 @@ useEffect(() => {
 
       <div id="catalogo">
         <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>LO MÁS<br /><em>buscado</em></h2>
+          <h2 className={styles.sectionTitle}>LO MÁS PRUEBA123<br /><em>buscado</em></h2>
           <div className={styles.filterBar}>
             {CATEGORIES.map(c => (
               <button
