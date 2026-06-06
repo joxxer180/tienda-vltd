@@ -2,13 +2,18 @@ import { supabase } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const { data, error, count } = await supabase
+  const { data, error } = await supabase
     .from('products')
-    .select('*', { count: 'exact' })
+    .select('*')
+    .eq('active', true)
+    .order('created_at', { ascending: false })
 
-  return NextResponse.json({
-    count,
-    error,
-    data
-  })
+  if (error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    )
+  }
+
+  return NextResponse.json(data)
 }
