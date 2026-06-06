@@ -1,15 +1,12 @@
 import { supabase } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
-  const { data, error } = await supabase
+  const result = await supabase
     .from('products')
     .select('*')
 
-  return NextResponse.json({
-    timestamp: Date.now(),
-    total: data?.length || 0,
-    data,
-    error
-  })
+  return NextResponse.json(result)
 }
