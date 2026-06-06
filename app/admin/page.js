@@ -2,8 +2,14 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import styles from './admin.module.css'
-
-const EMPTY_FORM = { name: '', price: '', old_price: '', category: 'mujer', tag: '', image_file: null }
+const EMPTY_FORM = {
+  name: '',
+  price: '',
+  old_price: '',
+  category: 'mujer',
+  tag: '',
+  image_files: []
+}
 
 export default function AdminPage() {
  const [secret, setSecret] = useState('')
@@ -34,7 +40,7 @@ export default function AdminPage() {
   'https://fappkckfuqqwzrmnqfon.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZhcHBrY2tmdXFxd3pybW5xZm9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMDY3MDgsImV4cCI6MjA5NTY4MjcwOH0.LV7-eXyBYZymSH0PyR0dicnjepsFsqcDPga7AgiT8S8'
 )
-
+console.log(form.image_files)
    let image_url = null
 
    if (form.image_file) {
@@ -142,7 +148,7 @@ category} onChange={e => setForm({...form, category: e.target.value})}>
              </select>
            </label>
            <label>Imagen del producto
-             <input type="file" accept="image/*" onChange={e => setForm({...form, image_file: e.target.files?.[0] || null})} />
+             <input type="file" multiple accept="image/*" onChange={e => setForm({...form, image_files: Array.from(e.target.files || [])
            </label>
            {msg && <div className={styles.msg}>{msg}</div>}
            <button type="submit" className={styles.btnSubmit} disabled={loading}>
