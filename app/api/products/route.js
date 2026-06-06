@@ -1,9 +1,14 @@
+import { supabase } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  return NextResponse.json([
-    { name: 'PRODUCTO A' },
-    { name: 'PRODUCTO B' },
-    { name: 'PRODUCTO C' }
-  ])
+  const { data, error, count } = await supabase
+    .from('products')
+    .select('*', { count: 'exact' })
+
+  return NextResponse.json({
+    count,
+    error,
+    data
+  })
 }
