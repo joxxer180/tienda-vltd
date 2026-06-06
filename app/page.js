@@ -19,7 +19,7 @@ useEffect(() => {
     .then(r => r.json())
     .then(res => {
       console.log('API:', res)
-      setProducts(res.data || [])
+      setProducts(res)
     })
     .catch(err => {
       console.error(err)
