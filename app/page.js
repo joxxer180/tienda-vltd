@@ -28,7 +28,8 @@ useEffect(() => {
 }, [])
 
   const filtered = filter === 'todos' ? products : products.filter(p => p.category === filter)
-
+console.log('PRODUCTS STATE:', products)
+console.log('FILTERED:', filtered)
   function addToCart(product) {
     setCart(prev => {
       const ex = prev.find(x => x.id === product.id)
