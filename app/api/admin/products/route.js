@@ -27,16 +27,54 @@ export async function POST(request) {
 }
 
 export async function DELETE(request) {
-  if (!isAuthorized(request))
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  try {
+    const secret = request.headers.get('x-admin-secret')
 
-  const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_KEY)
-  const { id } = await request.json()
-  const { error } = await supabaseAdmin
-    .from('products')
-    .delete()
-    .eq('id', id)
+    console.log('HEADER:', secret)
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json({ ok: true })
+    if (!isAuthorized(request)) {
+      return NextResponse.json(
+        { error: 'No autorizado' },
+        { status: 401 }
+      )
+    }
+
+    const { id } = await request.json()
+
+    console.log('ID:', id)
+
+    const supabaseAdmin = createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    )
+
+    const { data, error } = await supabaseAdmin
+      .from('products')
+      .delete()
+      .eq('id', id)
+      .select()
+
+    console.log('DELETE ERROR:', error)
+    console.log('DELETE DATA:', data)
+
+    if (error) {
+      return NextResponse.json(
+        { error: error.message },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({
+      ok: true,
+      deleted: data
+    })
+
+  } catch (err) {
+    console.log('CATCH ERROR:', err)
+
+    return NextResponse.json(
+      { error: String(err) },
+      { status: 500 }
+    )
+  }
 }
