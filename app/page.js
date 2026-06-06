@@ -54,7 +54,7 @@ console.log('FILTERED:', filtered)
   return (
     <>
       <nav className={styles.nav}>
-        <a className={styles.logo} href="#">VLTD</a>
+        <a className={styles.logo} href="#">VENTAS ISRAEL</a>
         <ul className={styles.navLinks}>
           {['Nuevos', 'Mujer', 'Hombre', 'Accesorios', 'Sale'].map(l => (
             <li key={l}><a href="#">{l}</a></li>
