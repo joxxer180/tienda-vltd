@@ -12,12 +12,20 @@ export default function StorePage() {
   const [cartOpen, setCartOpen] = useState(false)
   const [toast, setToast] = useState('')
 
-  useEffect(() => {
-    fetch('/api/products')
-      .then(r => r.json())
-      .then(data => setProducts(Array.isArray(data) ? data : []))
-      .catch(() => setProducts([]))
-  }, [])
+useEffect(() => {
+  fetch('/api/products', {
+    cache: 'no-store'
+  })
+    .then(r => r.json())
+    .then(res => {
+      console.log('API:', res)
+      setProducts(res.data || [])
+    })
+    .catch(err => {
+      console.error(err)
+      setProducts([])
+    })
+}, [])
 
   const filtered = filter === 'todos' ? products : products.filter(p => p.category === filter)
 
