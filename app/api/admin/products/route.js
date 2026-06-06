@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
 const SUPABASE_URL = 'https://fappkckfuqqwzrmnqfon.supabase.co'
-const SUPABASE_KEY = 'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZhcHBrY2tmdXFxd3pybW5xZm9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMDY3MDgsImV4cCI6MjA5NTY4MjcwOH0.LV7-eXyBYZymSH0PyR0dicnjepsFsqcDPga7AgiT8S8'
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZhcHBrY2tmdXFxd3pybW5xZm9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMDY3MDgsImV4cCI6MjA5NTY4MjcwOH0.LV7-eXyBYZymSH0PyR0dicnjepsFsqcDPga7AgiT8S8'
 
 function isAuthorized(request) {
   const secret = request.headers.get('x-admin-secret')
