@@ -1,45 +1,26 @@
-export const dynamic = 'force-dynamic'
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
-function isAuthorized(request) {
-  const secret = request.headers.get('x-admin-secret')
-  return secret === process.env.ADMIN_SECRET
-}
+export const dynamic = 'force-dynamic'
 
-export async function POST(request) {
-  if (!isAuthorized(request))
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
-
-  const supabaseAdmin = createClient(
+export async function GET() {
+  const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   )
-  const body = await request.json()
-  const { data, error } = await supabaseAdmin
+
+  const { data, error } = await supabase
     .from('products')
-    .insert([body])
-    .select()
-    .single()
+    .select('*')
+    .eq('active', true)
+    .order('created_at', { ascending: false })
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json(data, { status: 201 })
-}
+  if (error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    )
+  }
 
-export async function DELETE(request) {
-  if (!isAuthorized(request))
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
-
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-  )
-  const { id } = await request.json()
-  const { error } = await supabaseAdmin
-    .from('products')
-    .delete()
-    .eq('id', id)
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json({ ok: true })
+  return NextResponse.json(data)
 }
