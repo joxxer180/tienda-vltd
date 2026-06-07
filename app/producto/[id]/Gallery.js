@@ -21,7 +21,9 @@ export default function Gallery({ images, productName }) {
     <div>
       <div
         style={{
-          position: 'relative'
+          position: 'relative',
+          maxWidth: '900px',
+          margin: '0 auto'
         }}
       >
         <img
@@ -29,6 +31,8 @@ export default function Gallery({ images, productName }) {
           alt={productName}
           style={{
             width: '100%',
+            maxHeight: '600px',
+            objectFit: 'contain',
             borderRadius: '10px'
           }}
         />
