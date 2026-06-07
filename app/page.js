@@ -111,10 +111,14 @@ console.log('FILTERED:', filtered)
                 {filtered.map(p => (
                   <div key={p.id} className={styles.card}>
                     <div className={styles.cardImg}>
-                      {p.image_url
-                        ? <img src={p.image_url} alt={p.name} />
-                        : <span className={styles.cardImgLabel}>{p.name.split(' ')[0].toUpperCase()}</span>
-                      }
+                      {p.images?.length > 0
+  ? <img src={p.images[0]} alt={p.name} />
+  : p.image_url
+    ? <img src={p.image_url} alt={p.name} />
+    : <span className={styles.cardImgLabel}>
+        {p.name.split(' ')[0].toUpperCase()}
+      </span>
+}
                       {p.
 tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}>{p.tag === 'new' ? 'Nuevo' : 'Sale'}</span>}
                       <div className={styles.cardActions}>
