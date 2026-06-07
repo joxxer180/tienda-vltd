@@ -122,7 +122,7 @@ console.log('FILTERED:', filtered)
                       {p.
 tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}>{p.tag === 'new' ? 'Nuevo' : 'Sale'}</span>}
                       <div className={styles.cardActions}>
-                        <button className={styles.btnAdd} onClick={() => addToCart(p)}>+ Agregar</button>
+                        <button className={styles.btnAdd} onClick={() => window.location.href = `/producto/${p.id}`} > ver producto </button>
                         <button className={styles.btnWish}>♡</button>
                       </div>
                     </div>
