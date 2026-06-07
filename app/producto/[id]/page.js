@@ -1,3 +1,4 @@
+import Gallery from './Gallery'
 import { supabase } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
@@ -30,25 +31,10 @@ export default async function ProductPage({ params }) {
     >
       <h1>{product.name}</h1>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
-          gap: '20px'
-        }}
-      >
-        {images.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={product.name}
-            style={{
-              width: '100%',
-              borderRadius: '10px'
-            }}
-          />
-        ))}
-      </div>
+      <Gallery
+  images={images}
+  productName={product.name}
+/>
 
       <h2 style={{ marginTop: '30px' }}>
         ${Number(product.price).toLocaleString()}
