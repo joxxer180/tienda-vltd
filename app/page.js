@@ -122,9 +122,20 @@ console.log('FILTERED:', filtered)
                       {p.
 tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}>{p.tag === 'new' ? 'Nuevo' : 'Sale'}</span>}
                       <div className={styles.cardActions}>
-                        <button className={styles.btnAdd} onClick={() => window.location.href = `/producto/${p.id}`} > ver producto </button>
-                        <button className={styles.btnWish}>♡</button>
-                      </div>
+  <button
+    className={styles.btnAdd}
+    onClick={() => window.location.href = `/producto/${p.id}`}
+  >
+    Ver producto
+  </button>
+
+  <button
+    className={styles.btnWish}
+    onClick={() => addToCart(p)}
+  >
+    🛒
+  </button>
+</div>
                     </div>
                     <div className={styles.cardInfo}>
                       <div className={styles.cardCategory}>{CAT_LABEL[p.category] || p.category}</div>
