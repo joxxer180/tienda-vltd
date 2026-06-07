@@ -42,28 +42,38 @@ export default function AdminPage() {
 )
 console.log(form.image_files)
    let image_url = null
+let images = []
 
-   if (form.image_file) {
-     const file = form.image_file
-     const ext = file.name.split('.').pop()
-     const fileName = `${Date.now()}.${ext}`
+if (form.image_files?.length) {
 
-     const { error: uploadError } = await supabase.storage
-       .from('products')
-       .upload(fileName, file, { contentType: file.type })
+  for (const file of form.image_files) {
 
-     if (uploadError) {
-       setMsg(`❌ Error subiendo imagen: ${uploadError.message}`)
-       setLoading(false)
-       return
-     }
+    const ext = file.name.split('.').pop()
+    const fileName = `${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2)}.${ext}`
 
-     const { data: urlData } = supabase.storage
-       .from('products')
-       .getPublicUrl(fileName)
+    const { error: uploadError } = await supabase.storage
+      .from('products')
+      .upload(fileName, file, {
+        contentType: file.type
+      })
 
-     image_url = urlData.publicUrl
-   }
+    if (uploadError) {
+      setMsg(`❌ Error subiendo imagen: ${uploadError.message}`)
+      setLoading(false)
+      return
+    }
+
+    const { data: urlData } = supabase.storage
+      .from('products')
+      .getPublicUrl(fileName)
+
+    images.push(urlData.publicUrl)
+  }
+
+  image_url = images[0]
+}
 
    const res = await fetch('/api/admin/products', {
      method: 'POST',
@@ -75,6 +85,7 @@ console.log(form.image_files)
        category: form.category,
        tag: form.tag || null,
        image_url,
+       images,
        active: true,
      })
    })
