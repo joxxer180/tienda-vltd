@@ -182,7 +182,7 @@ tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}
   className={styles.btnCheckout}
   onClick={() => {
   const mensaje =
-    "Hola, quiero realizar un pedido:%0A%0A" +
+    "Hola, quiero realizar un pedido:\n\n" +
     cart
       .map(
         item =>
@@ -190,13 +190,13 @@ tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}
             item.price * item.qty
           ).toLocaleString()}`
       )
-      .join("%0A") +
-    `%0A%0ATotal: $${cartTotal.toLocaleString()}`
+      .join("\n") +
+    `\n\nTotal: $${cartTotal.toLocaleString()}`;
 
   window.open(
-    `https://wa.me/528135872190?text=${mensaje}`,
+    `https://wa.me/528135872190?text=${encodeURIComponent(mensaje)}`,
     "_blank"
-  )
+  );
 }}
 >
   PRUEBA WHATSAPP
