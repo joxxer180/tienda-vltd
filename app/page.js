@@ -68,13 +68,13 @@ console.log('FILTERED:', filtered)
 
       <section className={styles.hero}>
         <div className={styles.heroText}>
-          <p className={styles.eyebrow}>Nueva colección — 2025</p>
+          <p className={styles.eyebrow}>Nueva colección — 2026</p>
           <h1 className={styles.heroTitle}>ESTILO<br />SIN <em>límites</em></h1>
           <p className={styles.heroSub}>Piezas diseñadas para quienes no siguen tendencias, las crean.</p>
           <a href="#catalogo" className={styles.btnPrimary}>Ver colección →</a>
         </div>
         <div className={styles.heroImg}>
-          <span className={styles.heroImgLabel}>VLTD</span>
+          {/*<span className={styles.heroImgLabel}>VLTD</span>*/}
           <div className={styles.heroBadge}>
             <span>-30%</span>
             <span>En selección</span>
