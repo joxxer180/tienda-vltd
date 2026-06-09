@@ -178,7 +178,17 @@ tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}
             <span>Total</span>
             <span>${cartTotal.toLocaleString()}</span>
           </div>
-          <button className={styles.btnCheckout}>Proceder al pago</button>
+          <button
+  className={styles.btnCheckout}
+  onClick={() => {
+  window.open(
+    "https://wa.me/528135872190?text=Hola,%20quiero%20información%20sobre%20sus%20productos",
+    "_blank"
+  )
+}}
+>
+  Proceder al pago
+</button>
         </div>
       </div>
 
