@@ -199,7 +199,7 @@ tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}
   )
 }}
 >
-  Proceder al pago
+  PRUEBA WHATSAPP
 </button>
         </div>
       </div>
