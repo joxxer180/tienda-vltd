@@ -181,8 +181,20 @@ tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}
           <button
   className={styles.btnCheckout}
   onClick={() => {
+  const mensaje =
+    "Hola, quiero realizar un pedido:%0A%0A" +
+    cart
+      .map(
+        item =>
+          `• ${item.name} x${item.qty} - $${(
+            item.price * item.qty
+          ).toLocaleString()}`
+      )
+      .join("%0A") +
+    `%0A%0ATotal: $${cartTotal.toLocaleString()}`
+
   window.open(
-    "https://wa.me/528135872190?text=Hola,%20quiero%20información%20sobre%20sus%20productos",
+    `https://wa.me/528135872190?text=${mensaje}`,
     "_blank"
   )
 }}
@@ -196,7 +208,7 @@ tag && <span className={`${styles.tag} ${p.tag === 'new' ? styles.tagNew : ''}`}
 
       <footer className={styles.footer}>
         <span className={styles.footerLogo}>VLTD</span>
-        <span>© 2025 VLTD — Todos los derechos reservados</span>
+        <span>© 2026 VLTD — Todos los derechos reservados</span>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           <a href="#">Instagram</a>
           <a href="#">WhatsApp</a>
