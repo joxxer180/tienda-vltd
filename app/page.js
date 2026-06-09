@@ -70,7 +70,7 @@ console.log('FILTERED:', filtered)
         <div className={styles.heroText}>
           <p className={styles.eyebrow}>Nueva colección — 2026</p>
           <h1 className={styles.heroTitle}>ESTILO<br />SIN <em>límites</em></h1>
-          <p className={styles.heroSub}>Piezas diseñadas para quienes no siguen tendencias, las crean.</p>
+          <p className={styles.heroSub}>No sigas tendencias. Crea tu propio camino y deja tu huella.</p>
           <a href="#catalogo" className={styles.btnPrimary}>Ver colección →</a>
         </div>
         <div className={styles.heroImg}>
@@ -93,7 +93,7 @@ console.log('FILTERED:', filtered)
 
       <div id="catalogo">
         <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>LO MÁS PRUEBA123<br /><em>buscado</em></h2>
+          <h2 className={styles.sectionTitle}>TENEMOS LO MEJOR<br /><em>para ti</em></h2>
           <div className={styles.filterBar}>
             {CATEGORIES.map(c => (
               <button
